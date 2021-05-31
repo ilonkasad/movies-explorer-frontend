@@ -70,6 +70,14 @@
     max-inline-size: fit-content;
   }
 }
+@media screen and (min-width: 321px) and (max-width: 760px) {
+  .moviesCard__img {
+    height: 100px;
+  }
+  .moviesCard__info {
+    padding: 0px;
+  }
+}
 
 @media screen and (max-width: 320px) {
   .moviesCard {

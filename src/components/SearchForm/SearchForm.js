@@ -6,7 +6,7 @@ const SearchForm = ({ mainStatus }) => {
     return (
         <div className="searchform">
             <div className="searchform__input-block">
-                <input type="text" className="searchform__input" placeholder="Фильм"></input>
+                <input type="text" className="searchform__input" placeholder="Фильм" required></input>
                 <button className="searchform__button">
                     <img src={searchIcon} alt="Поиск" />
                 </button>

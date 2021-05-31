@@ -35,7 +35,16 @@
     width: calc(100% - 38px);
   }
 }
-
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .promo__logo {
+    width: 248px;
+    height: 248px;
+    background-size: cover;
+  }
+  .promo__title {
+    font-size: 31px;
+  }
+}
 @media screen and (max-width: 320px) {
   .promo__logo {
     width: 248px;

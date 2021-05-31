@@ -19,6 +19,7 @@
   box-sizing: border-box;
   width: inherit;
   padding: 20px;
+  color: #ffffff;
 }
 .searchform__button {
   background-color: #4285f4;
@@ -28,6 +29,10 @@
   margin-left: 10px;
   border: none;
   align-self: center;
+  cursor: pointer;
+}
+.searchform__button:hover {
+  opacity: 0.6;
 }
 .searchform__toggle-button {
   position: relative;

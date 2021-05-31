@@ -59,6 +59,25 @@
     padding: 236px 0px 269px 0px;
   }
 }
+
+@media screen and (min-width: 769px) and (max-width: 1100px) {
+  .profile__info {
+    width: calc(100% - 150px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__info {
+    width: calc(100% - 179px * 2);
+    padding: 232px 0px 269px 0px;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 600px) {
+  .profile__info {
+    width: calc(100% - 50px);
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile__info {
     width: calc(100% - 30px * 2);
