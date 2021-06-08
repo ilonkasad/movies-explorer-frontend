@@ -7,11 +7,13 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
+//import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Main = ({ onLogoClick, handleRegister, handleLogin }) => {
+const Main = ({ onLogoClick, handleGoToRegister, handleGoToLogin }) => {
+    //const currentUser = React.useContext(CurrentUserContext);
     return (
         <div>
-            <Header mainStatus="Main" onLogoClick={onLogoClick} handleRegister={handleRegister} handleLogin={handleLogin} />
+            <Header mainStatus="Main" onLogoClick={onLogoClick} onRegisterClick={handleGoToRegister} onLoginClick={handleGoToLogin} />
             <Promo />
             <NavTab />
             <AboutProject />

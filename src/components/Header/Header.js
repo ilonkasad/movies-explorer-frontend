@@ -4,7 +4,7 @@ import accIcon from '../../images/account.svg';
 import menuIcon from '../../images/logo-menu.svg';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ mainStatus, onMenuForm, onLogoClick, isSavedMovies, handleRegister, handleLogin, handleProfile }) => {
+const Header = ({ mainStatus, onMenuForm, onLogoClick, isSavedMovies, onRegisterClick, onLoginClick, handleProfile }) => {
     let headerBlockClassName, logoClassName, moviesBlockClassName, regBlockClassName, accBlockClassName, menuBtnClassName;
     switch (mainStatus) {
         case 'Main':
@@ -51,8 +51,8 @@ const Header = ({ mainStatus, onMenuForm, onLogoClick, isSavedMovies, handleRegi
                 <NavLink to="/saved-movies" className={!isSavedMovies ? `header__movie` : `header__movie_bold`}>Сохранённые фильмы</NavLink>
             </div>
             <div className={regBlockClassName}>
-                <button className="header__btn-reg" onClick={handleRegister}>Регистрация</button>
-                <button className="header__btn-signin" onClick={handleLogin}>Войти</button>
+                <button className="header__btn-reg" onClick={onRegisterClick}>Регистрация</button>
+                <button className="header__btn-signin" onClick={onLoginClick}>Войти</button>
             </div>
             <div className={accBlockClassName}>
                 <p>Аккаунт</p>

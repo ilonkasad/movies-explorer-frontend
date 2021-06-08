@@ -36,11 +36,18 @@
   box-sizing: border-box;
   padding: 20px;
   color: #ffffff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+.register__label {
+  margin-top: 15px;
 }
 .register__err {
   color: #ee3465;
-  margin-top: -10px;
+  margin: 0;
+}
+.register__err_hide {
+  margin: 0;
+  visibility: hidden;
 }
 .register__btn {
   background-color: #4285f4;
@@ -53,6 +60,10 @@
   height: 45px;
   margin-top: 69px;
   margin-bottom: 16px;
+}
+.register__btn_disable {
+  opacity: 0.4;
+  background-color: #2f2f2f;
 }
 .register__assumption {
   margin: 0 auto;

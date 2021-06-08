@@ -24,10 +24,18 @@
   line-height: 29px;
   margin-bottom: 123px;
 }
-.profile__elem {
+.profile__elem-block {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
+}
+.profile__elem {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
 }
 .profile__btn {
   font-size: 13px;
@@ -38,7 +46,10 @@
   text-decoration: none;
   background-color: inherit;
   color: inherit;
-  margin-top: 220px;
+  margin-top: 170px;
+}
+.profile__btn_disable {
+  opacity: 0.5;
 }
 .profile__btn_out {
   color: #ee3465;
@@ -49,8 +60,18 @@
   border: none;
   background-color: #424242;
   height: 1px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 10px;
+  margin-bottom: 26px;
+}
+.profile__err {
+  margin: 0;
+  color: #ee3465;
+  margin-right: 20px;
+  text-align: right;
+}
+.profile__err_hide {
+  margin: 0;
+  visibility: hidden;
 }
 
 @media screen and (max-width: 768px) {

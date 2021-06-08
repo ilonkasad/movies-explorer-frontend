@@ -2,7 +2,7 @@ import React from 'react';
 import photo from '../../images/photo.jpg';
 const AboutMe = () => {
     return (
-        <div className="aboutme">
+        <div className="aboutme" id="aboutme">
             <p className="aboutme__title">Студент</p>
             <div className="aboutme__info">
                 <div className="aboutme__text-info">

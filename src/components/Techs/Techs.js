@@ -1,7 +1,7 @@
 import React from 'react';
 const Techs = () => {
     return (
-        <div className="techs">
+        <div className="techs" id="techs">
             <p className="techs__title">Технологии</p>
             <p className="techs__heading">7 технологий</p>
             <p className="techs__description">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>

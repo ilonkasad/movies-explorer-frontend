@@ -1,7 +1,7 @@
 import React from 'react';
 const AboutProject = () => {
     return (
-        <div className="aboutproject">
+        <div className="aboutproject" id="aboutproject">
             <p className="aboutproject__title">О проекте</p>
             <div className="aboutproject__content">
                 <div className="aboutproject__content-detail">

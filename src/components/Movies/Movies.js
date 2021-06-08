@@ -6,13 +6,30 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Navigation from '../Navigation/Navigation';
 
-const Movies = ({ isMenuOpen, onMenuForm, onLogoClick, handleProfile, handleMenuClose }) => {
+const Movies = ({ movies, savedMovies, width, counter, isMenuOpen, onMenuForm, onLogoClick, handleProfile,
+    handleMenuClose, onMoreClick, onLikeClick, onSearchClick, isPreloaderActive, isMoviesBlockActive,
+    isValidSearch, isShowMore, onChangeToggle, isToggle, resultMessage }) => {
+    let msgClass;
+    if (movies.length === 0 && isMoviesBlockActive && resultMessage === '') {
+        resultMessage = 'Ничего не найдено'
+        msgClass = 'movies';
+    }
+    else {
+        msgClass = 'movies movies_hide';
+    }
     return (
         <div>
+            <div className="movies_hide">
+                {`Current width -> ${width} Current counter -> ${counter}`}
+            </div>
             <Header mainStatus="Movies" onMenuForm={onMenuForm} onLogoClick={onLogoClick} isSavedMovies={false} handleProfile={handleProfile} />
-            <SearchForm />
-            <Preloader />
-            <MoviesCardList isSavedList={false} />
+            <SearchForm onSearchClick={onSearchClick} isValid={isValidSearch} onChangeToggle={onChangeToggle} isToggle={isToggle} isSaved={false} />
+            <Preloader isPreloaderActive={isPreloaderActive} />
+            <div className={msgClass}>
+                <p className="movies__result">{resultMessage}</p>
+            </div>
+            <MoviesCardList movies={movies} counter={counter} savedMovies={savedMovies} isSavedList={false} onMoreClick={onMoreClick}
+                onLikeClick={onLikeClick} isMoviesBlockActive={isMoviesBlockActive} isShowMore={isShowMore} />
             <Navigation isOpen={isMenuOpen} handleProfile={handleProfile} handleMenuClose={handleMenuClose} />
             <Footer />
         </div>
