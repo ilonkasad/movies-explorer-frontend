@@ -13,7 +13,8 @@ export default class MainApi {
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
             method: 'GET',
-            headers: this._headers
+            headers: this._headers,
+            credentials: 'include'
         })
             .then(res => this._getResponseData(res))
     }
@@ -30,7 +31,8 @@ export default class MainApi {
     getMoviesFromSavedList() {
         return fetch(`${this._url}/movies`, {
             method: 'GET',
-            headers: this._headers
+            headers: this._headers,
+            credentials: 'include'
         })
             .then(res => this._getResponseData(res))
     }

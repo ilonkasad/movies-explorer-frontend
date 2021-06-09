@@ -10,12 +10,12 @@ const Movies = ({ movies, savedMovies, width, counter, isMenuOpen, onMenuForm, o
     handleMenuClose, onMoreClick, onLikeClick, onSearchClick, isPreloaderActive, isMoviesBlockActive,
     isValidSearch, isShowMore, onChangeToggle, isToggle, resultMessage }) => {
     let msgClass;
-    if (movies.length === 0 && isMoviesBlockActive && resultMessage === '') {
-        resultMessage = 'Ничего не найдено'
-        msgClass = 'movies';
-    }
-    else {
-        msgClass = 'movies movies_hide';
+    msgClass = 'movies movies_hide';
+    if (movies != null) {
+        if (movies.length === 0 && isMoviesBlockActive && resultMessage === '') {
+            resultMessage = 'Ничего не найдено'
+            msgClass = 'movies';
+        }
     }
     return (
         <div>

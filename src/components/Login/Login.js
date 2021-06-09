@@ -26,7 +26,7 @@ const Login = ({ onLogoClick, handleLogin, isLogin }) => {
                 <p className={validation.errors.password === 'valid' ? 'login__err_hide' : 'login__err'}>Неверно указан пароль</p>
 
                 <button disabled={!validation.checkValidForm(n)} className={validation.checkValidForm(n) ? 'login__btn' : 'login__btn login__btn_disable'}>Войти</button>
-                <p className="login__assumption">Ещё не зарегистрированы?    <a className="login__assumption-link" href="/signup">Регистрация</a></p>
+                <p className="login__assumption">Ещё не зарегистрированы?    <a className="login__assumption-link" href=' '>Регистрация</a></p>
                 <p className={isLogin ? "login__bad " : "login__bad login__bad_hide"}>Не удалось войти</p>
             </div>
         </form>

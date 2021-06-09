@@ -1,4 +1,5 @@
-export const BASE_URL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
+export const BASE_URL = `${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
+//export const BASE_URL = 'http://localhost:3000'
 export const SERVER_URL = 'https://api.nomoreparties.co';
 export const MOVIES_URL = `${SERVER_URL}/beatfilm-movies/`;
 

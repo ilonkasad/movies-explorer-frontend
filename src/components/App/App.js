@@ -128,7 +128,8 @@ function App() {
             setSavedMovies(data);
             setMoviesForFilter(data);
             if (localStorage.getItem('loggedIn') === 'true') {
-                const movies = JSON.parse(localStorage.getItem('allMovies'));
+                let movies = JSON.parse(localStorage.getItem('allMovies'));
+                if (movies === null) { movies = []; }
                 setMoviesActive(true);
                 setCounter(defineCountParts(counter));
                 setPartMovies(movies);
