@@ -10,26 +10,30 @@ const Movies = ({ movies, savedMovies, width, counter, isMenuOpen, onMenuForm, o
     handleMenuClose, onMoreClick, onLikeClick, onSearchClick, isPreloaderActive, isMoviesBlockActive,
     isValidSearch, isShowMore, onChangeToggle, isToggle, resultMessage }) => {
     let msgClass;
+    let showMore = isShowMore;
     msgClass = 'movies movies_hide';
     if (movies != null) {
         if (movies.length === 0 && isMoviesBlockActive && resultMessage === '') {
+            showMore = false;
+            localStorage.removeItem('allMovies');
             resultMessage = 'Ничего не найдено'
             msgClass = 'movies';
         }
     }
+
     return (
         <div>
             <div className="movies_hide">
                 {`Current width -> ${width} Current counter -> ${counter}`}
             </div>
-            <Header mainStatus="Movies" onMenuForm={onMenuForm} onLogoClick={onLogoClick} isSavedMovies={false} handleProfile={handleProfile} />
+            <Header mainStatus="Movies" onMenuForm={onMenuForm} onLogoClick={onLogoClick} isBoldMovie={true} isSavedMovies={false} handleProfile={handleProfile} />
             <SearchForm onSearchClick={onSearchClick} isValid={isValidSearch} onChangeToggle={onChangeToggle} isToggle={isToggle} isSaved={false} />
             <Preloader isPreloaderActive={isPreloaderActive} />
             <div className={msgClass}>
                 <p className="movies__result">{resultMessage}</p>
             </div>
             <MoviesCardList movies={movies} counter={counter} savedMovies={savedMovies} isSavedList={false} onMoreClick={onMoreClick}
-                onLikeClick={onLikeClick} isMoviesBlockActive={isMoviesBlockActive} isShowMore={isShowMore} />
+                onLikeClick={onLikeClick} isMoviesBlockActive={isMoviesBlockActive} isShowMore={showMore} />
             <Navigation isOpen={isMenuOpen} handleProfile={handleProfile} handleMenuClose={handleMenuClose} />
             <Footer />
         </div>

@@ -46,7 +46,7 @@
   text-decoration: none;
   background-color: inherit;
   color: inherit;
-  margin-top: 170px;
+  margin-top: 90px;
 }
 .profile__btn_disable {
   opacity: 0.5;
@@ -72,6 +72,16 @@
 .profile__err_hide {
   margin: 0;
   visibility: hidden;
+}
+.profile__success {
+  color: #3ddc84;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 50px;
+  visibility: hidden;
+}
+.profile__success_active {
+  visibility: visible;
 }
 
 @media screen and (max-width: 768px) {

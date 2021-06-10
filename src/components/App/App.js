@@ -52,6 +52,7 @@ function App() {
     const [isShowMore, setIsShowMore] = React.useState(true);
     const [isToggle, setToggle] = React.useState(false);
     const [isLogin, setIsLogin] = React.useState(true);
+    const [isChangedSuccess, setIsChangedSuccess] = React.useState(false);
     const [resultMessage, setResultMessage] = React.useState('');
     const getWidth = () => window.innerWidth
         || document.documentElement.clientWidth
@@ -80,6 +81,7 @@ function App() {
         if (inputValue === '') {
             setisValidSearch(true);
             setMoviesActive(false);
+            setPartMovies([]);
         }
         else {
             setisValidSearch(false);
@@ -107,7 +109,6 @@ function App() {
             if (!isSaved) {
                 let filterData = filterByToggle(filterMovies);
                 setPartMovies(filterData);
-                localStorage.setItem('allMovies', JSON.stringify(filterData));
             }
             else {
                 let filterData = filterByToggle(savedMovies);
@@ -117,7 +118,6 @@ function App() {
         else {
             if (!isSaved) {
                 setPartMovies(filterMovies)
-                localStorage.setItem('allMovies', JSON.stringify(filterMovies));
             }
             else { setSavedMovies(moviesForFilter); }
         }
@@ -127,13 +127,6 @@ function App() {
         mainApi.getMoviesFromSavedList().then(data => {
             setSavedMovies(data);
             setMoviesForFilter(data);
-            if (localStorage.getItem('loggedIn') === 'true') {
-                let movies = JSON.parse(localStorage.getItem('allMovies'));
-                if (movies === null) { movies = []; }
-                setMoviesActive(true);
-                setCounter(defineCountParts(counter));
-                setPartMovies(movies);
-            }
         })
             .catch((err) => {
                 setResultMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
@@ -159,7 +152,7 @@ function App() {
     }
 
     function useCurrentWidth() {
-        let [curWidth, setWidth] = React.useState(getWidth());
+        const [curWidth, setWidth] = React.useState(getWidth());
         useEffect(() => {
             let timeoutId = null;
             const resizeListener = () => {
@@ -199,7 +192,6 @@ function App() {
         else {
             setIsShowMore(true);
             setPartMovies(filterMovies);
-            localStorage.setItem('allMovies', JSON.stringify(filterMovies));
         }
     }
 
@@ -207,9 +199,10 @@ function App() {
         auth.authorize(email, password)
             .then((data) => {
                 if (data.token) {
-                    localStorage.setItem('token', data.token)
-                    localStorage.setItem('loggedIn', true);
                     setLoggedIn(true);
+                    localStorage.setItem('token', data.token);
+                    mainApi.setToken();
+                    localStorage.setItem('loggedIn', true);
                     setIsLogin(true);
                     setUser({
                         ...currentUser
@@ -245,8 +238,7 @@ function App() {
 
     const handleSignOut = () => {
         setLoggedIn(false);
-        localStorage.removeItem('token');
-        localStorage.removeItem('loggedIn');
+        localStorage.clear();
         setUser({
             ...currentUser,
             name: '',
@@ -258,9 +250,11 @@ function App() {
         mainApi.updateUserInfo(obj)
             .then(res => {
                 setUser(res.data);
+                setIsChangedSuccess(true);
             })
             .catch((err) => {
                 console.log(err);
+                setIsChangedSuccess(false);
             })
     }
 
@@ -296,6 +290,7 @@ function App() {
             auth.getContent(token)
                 .then((res) => {
                     if (res) {
+                        mainApi.setToken();
                         setLoggedIn(true);
                         localStorage.setItem('loggedIn', true);
                         setUser(userData => ({ ...userData, name: res.name, email: res.email }));
@@ -322,6 +317,32 @@ function App() {
         tokenCheck();
     }, [tokenCheck])
 
+    useEffect(() => {
+        if (localStorage.getItem('token') !== null && loggedIn) {
+            getSavedMovies();
+        }
+    }, [getSavedMovies, loggedIn])
+
+    //получаем предыдущее состояние выбранных фильмов 
+    React.useMemo(() => {
+        let movies = [];
+        if ((localStorage.getItem('allMovies') != null) && (localStorage.getItem('token') !== null)) {
+            movies = JSON.parse(localStorage.getItem('allMovies'));
+        }
+        setPartMovies(movies);
+        setCounter(defineCountParts(counter));
+        setMoviesActive(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    //обновляем состояние выбранных фильмов
+    React.useMemo(() => {
+        if (currentPartMovies.length > 0) {
+            localStorage.setItem('allMovies', JSON.stringify(currentPartMovies));
+        }
+
+    }, [currentPartMovies]);
+
     //информация о пользователе
     React.useEffect(() => {
         if (localStorage.getItem('token') !== null) {
@@ -333,11 +354,7 @@ function App() {
                     console.log(err);
                 })
         }
-    }, [])
-
-    useEffect(() => {
-        getSavedMovies();
-    }, [getSavedMovies])
+    }, [loggedIn])
 
     function handleShowMenu() {
         setShowMenuOpen(true);
@@ -367,7 +384,7 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
                 <Switch>
                     <Route exact path="/">
-                        <Main onLogoClick={handleLogo} handleGoToRegister={handleGoToRegister} handleGoToLogin={handleGoToLogin} />
+                        <Main onLogoClick={handleLogo} handleGoToRegister={handleGoToRegister} handleGoToLogin={handleGoToLogin} loggedIn={loggedIn} handleProfile={handleProfile} />
                     </Route>
                     <ProtectedRoute exact path="/movies" component={Movies}
                         movies={currentPartMovies} savedMovies={savedMovies} width={width} counter={counter} isMenuOpen={isMenuOpen} onMenuForm={handleShowMenu}
@@ -389,7 +406,7 @@ function App() {
                     </Route>
                     <ProtectedRoute exact path="/profile" component={Profile}
                         isMenuOpen={isMenuOpen} onMenuForm={handleShowMenu} onLogoClick={handleLogo} handleProfile={handleProfile} handleMenuClose={handleMenuClose}
-                        EditProfile={handleEditProfile} handleSignOut={handleSignOut} dataUser={currentUser} loggedIn={loggedIn}>
+                        EditProfile={handleEditProfile} handleSignOut={handleSignOut} dataUser={currentUser} loggedIn={loggedIn} isChangedSuccess={isChangedSuccess}>
                     </ProtectedRoute>
                     <Route path="/">
                         <ErrNotFound />

@@ -4,16 +4,16 @@ import accIcon from '../../images/account.svg';
 import menuIcon from '../../images/logo-menu.svg';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ mainStatus, onMenuForm, onLogoClick, isSavedMovies, onRegisterClick, onLoginClick, handleProfile }) => {
+const Header = ({ mainStatus, onMenuForm, onLogoClick, isBoldMovie, isSavedMovies, onRegisterClick, onLoginClick, handleProfile, loggedIn }) => {
     let headerBlockClassName, logoClassName, moviesBlockClassName, regBlockClassName, accBlockClassName, menuBtnClassName;
     switch (mainStatus) {
         case 'Main':
             headerBlockClassName = 'header header_main';
             logoClassName = 'header__logo';
-            moviesBlockClassName = 'header__hide';
-            regBlockClassName = 'header__login';
-            accBlockClassName = 'header__hide';
-            menuBtnClassName = 'header__hide';
+            moviesBlockClassName = loggedIn ? 'header__movies' : 'header__hide';
+            regBlockClassName = loggedIn ? 'header__hide' : 'header__login';
+            accBlockClassName = loggedIn ? 'header__account' : 'header__hide';
+            menuBtnClassName = loggedIn ? 'header__btn-menu' : 'header__hide';
             break;
         case 'Movies':
             headerBlockClassName = 'header';
@@ -47,8 +47,8 @@ const Header = ({ mainStatus, onMenuForm, onLogoClick, isSavedMovies, onRegister
                 <img src={logoIcon} alt="Логотип" />
             </button>
             <div className={moviesBlockClassName}>
-                <NavLink to="/movies" className={isSavedMovies ? `header__movie` : `header__movie_bold`}>Фильмы</NavLink>
-                <NavLink to="/saved-movies" className={!isSavedMovies ? `header__movie` : `header__movie_bold`}>Сохранённые фильмы</NavLink>
+                <NavLink to="/movies" className={isBoldMovie && !isSavedMovies ? `header__movie_bold` : `header__movie`}>Фильмы</NavLink>
+                <NavLink to="/saved-movies" className={isBoldMovie && isSavedMovies ? `header__movie_bold` : `header__movie`}>Сохранённые фильмы</NavLink>
             </div>
             <div className={regBlockClassName}>
                 <button className="header__btn-reg" onClick={onRegisterClick}>Регистрация</button>

@@ -9,10 +9,13 @@ const MoviesCardList = (props) => {
     if (!props.isShowMore) {
         moviesBtnClassName = 'moviesCardList__btn moviesCardList__btn_hide';
     }
-    let curPartMovies = props.movies.slice(0, props.counter);
+    let curPartMovies = [];
+    if (props.movies != null) {
+        curPartMovies = props.movies.slice(0, props.counter);
+    }
 
     function handleMoreClick() {
-        let curCounter = props.counter + 1;
+        const curCounter = props.counter + 1;
         props.onMoreClick(curCounter);
     }
     return (

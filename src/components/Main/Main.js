@@ -9,11 +9,12 @@ import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 //import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const Main = ({ onLogoClick, handleGoToRegister, handleGoToLogin }) => {
+const Main = ({ onLogoClick, handleGoToRegister, handleGoToLogin, loggedIn, handleProfile }) => {
     //const currentUser = React.useContext(CurrentUserContext);
     return (
         <div>
-            <Header mainStatus="Main" onLogoClick={onLogoClick} onRegisterClick={handleGoToRegister} onLoginClick={handleGoToLogin} />
+            <Header mainStatus="Main" onLogoClick={onLogoClick} onRegisterClick={handleGoToRegister} onLoginClick={handleGoToLogin} loggedIn={loggedIn}
+                handleProfile={handleProfile} isBoldMovie={false} isSavedMovies={false} />
             <Promo />
             <NavTab />
             <AboutProject />

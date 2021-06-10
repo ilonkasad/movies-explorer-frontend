@@ -18,7 +18,7 @@ const SavedMovies = ({ movies, savedMovies, isMenuOpen, onMenuForm, onLogoClick,
     }
     return (
         <div>
-            <Header mainStatus="Movies" onMenuForm={onMenuForm} onLogoClick={onLogoClick} isSavedMovies={true} handleProfile={handleProfile} />
+            <Header mainStatus="Movies" onMenuForm={onMenuForm} onLogoClick={onLogoClick} isBoldMovie={true} isSavedMovies={true} handleProfile={handleProfile} />
             <SearchForm onSearchClick={onSearchClick} isValid={isValidSearch} onChangeToggle={onChangeToggle} isToggle={isToggle} isSaved={true} />
             <Preloader />
             <div className={msgClass}>
