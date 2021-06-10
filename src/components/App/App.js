@@ -107,11 +107,11 @@ function App() {
     const getToggleFilter = (isToggle, filterMovies, isSaved) => {
         if (isToggle) {
             if (!isSaved) {
-                let filterData = filterByToggle(filterMovies);
+                const filterData = filterByToggle(filterMovies);
                 setPartMovies(filterData);
             }
             else {
-                let filterData = filterByToggle(savedMovies);
+                const filterData = filterByToggle(savedMovies);
                 setSavedMovies(filterData);
             };
         }
