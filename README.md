@@ -1,6 +1,7 @@
-### Diploma project: Backend
+### Diploma project: Frontend
+Use it with https://github.com/ilonkasad/movies-explorer-api
 
-Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете
+Description: A service where you can find movies on demand and save them in your personal account
 
 ### Developing locally (Quick Start)
 If you want to work on locally:
