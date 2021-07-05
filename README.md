@@ -14,9 +14,10 @@ npm install
 npm install
 Start build in the watch mode. This command will start microbundle in watch mode, meaning that everytime you make changes to the source will be compiled to dist folder
 ```
-npm run dev
+npm run build
+npm run start
 ```
 
-If everything went well, server running on http://localhost:3000
+If everything went well, server running on http://localhost:3001
 
 
